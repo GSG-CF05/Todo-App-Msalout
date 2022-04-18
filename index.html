@@ -12,6 +12,42 @@
     <title>ToDo|App</title>
   </head>
   <body>
+    <i class="fas fa-moon toggle-btn"></i>
+    <header>
+      <h1>ToDo App</h1>
+    </header>
+    <form>
+      <label for="new-todo">New ToDo</label>
+      <input
+        type="text"
+        id="new-todo"
+        class="todo-input"
+        autocomplete="off"
+        required
+      />
+      <button type="submit" class="add">Add ToDo</button>
+    </form>
+    <div class="content">
+      <h2>ToDo List</h2>
+      <ul class="list">
+        <li class="item">
+          <div class="text">
+            <input
+              type="text"
+              class="item-text"
+              value="Write a blog post"
+              readonly
+            />
+            <input type="text" class="item-text" hidden />
+          </div>
+          <div class="buttons">
+            <button class="save" hidden>Save</button>
+            <button class="edit">Edit</button>
+            <button class="delete">Delete</button>
+          </div>
+        </li>
+      </ul>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>
