@@ -74,7 +74,7 @@ function addTask(e) {
     editBtn.textContent = "Edit";
     buttonsDiv.appendChild(editBtn);
 
-    // editBtn.addEventListener("click", editTask);
+    editBtn.addEventListener("click", editTask);
 
     let deleteBtn = document.createElement("button");
     deleteBtn.setAttribute("class", "delete");
@@ -136,7 +136,7 @@ function getElementOnLoaded() {
     editBtn.textContent = "Edit";
     buttonsDiv.appendChild(editBtn);
 
-    // editBtn.addEventListener("click", editTask);
+    editBtn.addEventListener("click", editTask);
 
     let deleteBtn = document.createElement("button");
     deleteBtn.setAttribute("class", "delete");
@@ -145,4 +145,42 @@ function getElementOnLoaded() {
 
     // deleteBtn.addEventListener("click", deleteTask);
   });
+}
+
+function editTask(e) {
+  if (e.target.classList.contains("edit")) {
+    let editBtn = e.target;
+    editBtn.setAttribute("hidden", null);
+    let saveBtn = editBtn.parentElement.children[0];
+    saveBtn.removeAttribute("hidden");
+    saveBtn.addEventListener("click", saveEdits);
+    let itemText = e.target.parentElement.parentElement.children[0].children[0];
+    itemText.setAttribute("hidden", null);
+    let itemText2 =
+      e.target.parentElement.parentElement.children[0].children[1];
+    itemText2.removeAttribute("hidden");
+    itemText2.value = itemText.value;
+    itemText2.focus();
+  }
+}
+
+function saveEdits(e) {
+  if (e.target.classList.contains("save")) {
+    let saveBtn = e.target;
+    saveBtn.setAttribute("hidden", null);
+    let editBtn = e.target.parentElement.children[1];
+    editBtn.removeAttribute("hidden");
+    let itemText = e.target.parentElement.parentElement.children[0].children[0];
+    let itemText2 =
+      e.target.parentElement.parentElement.children[0].children[1];
+    editToLocalStorage(itemText.value, itemText2.value);
+    location.reload();
+  }
+}
+
+function editToLocalStorage(item, item2) {
+  todoArray = JSON.parse(localStorage.getItem("Items"));
+  let index = todoArray.indexOf(item);
+  todoArray.splice(index, 1, item2);
+  localStorage.setItem("Items", JSON.stringify(todoArray));
 }
